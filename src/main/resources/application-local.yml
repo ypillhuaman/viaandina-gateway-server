@@ -1,0 +1,17 @@
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+  instance:
+    instance-id: ${spring.cloud.client.hostname}:${spring.application.name}:${random.value}
+
+spring:
+  cloud:
+    gateway:
+      routes:
+      - id: viandina-scheduler-msvc
+        uri: lb://viandina-scheduler-msvc
+        predicates:
+        - Path=/api/scheduler/**
+        filters:
+        - StripPrefix=2

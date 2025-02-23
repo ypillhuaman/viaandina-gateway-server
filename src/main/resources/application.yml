@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: viaandina-gateway-server
+  profiles:
+    active: local
+
+server:
+  port: 8090
