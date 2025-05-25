@@ -51,7 +51,11 @@ pipeline {
                         def app = docker.build("${IMAGE_NAME}:${IMAGE_TAG}")
                         app.push()
                         // Actualizamos la etiqueta 'latest' para que apunte a esta versión
-                        app.push('latest')
+                        // app.push('latest')
+
+                        // Tag y push remoto como latest
+                        sh "docker tag ${IMAGE_NAME}:${IMAGE_TAG} ${IMAGE_NAME}:latest"
+                        sh "docker push ${IMAGE_NAME}:latest"
                     }
                 }
             }
