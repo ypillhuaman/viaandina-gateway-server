@@ -50,12 +50,6 @@ pipeline {
                     docker.withRegistry('https://index.docker.io/v1/', "${params.DOCKER_CREDENTIALS}") {
                         def app = docker.build("${IMAGE_NAME}:${IMAGE_TAG}")
                         app.push()
-                        // Actualizamos la etiqueta 'latest' para que apunte a esta versión
-                        // app.push('latest')
-
-                        // Tag y push remoto como latest
-                        sh "docker tag ${IMAGE_NAME}:${IMAGE_TAG} ${IMAGE_NAME}:latest"
-                        sh "docker push ${IMAGE_NAME}:latest"
                     }
                 }
             }
@@ -68,6 +62,20 @@ pipeline {
                         cd ${DOCKER_COMPOSE_PATH}
                         APP_ENV=${params.ENVIRONMENT} docker compose pull ${SERVICE_NAME}
                         APP_ENV=${params.ENVIRONMENT} docker compose up -d ${SERVICE_NAME}
+                    """
+                }
+            }
+        }
+
+        stage('Limpiar imágenes <none> de scheduler-msvc') {
+            steps {
+                script {
+                    echo "Buscando imágenes <none> asociadas a ${SERVICE_NAME}..."
+                    sh """
+                        docker images --filter "dangling=true" --format "{{.ID}} {{.Repository}}" | \
+                        grep "${SERVICE_NAME}" | \
+                        awk '{print $1}' | \
+                        xargs -r docker rmi
                     """
                 }
             }
