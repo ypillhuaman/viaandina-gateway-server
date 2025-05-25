@@ -71,12 +71,12 @@ pipeline {
             steps {
                 script {
                     echo "Buscando imágenes <none> asociadas a ${SERVICE_NAME}..."
-                    sh """
+                    sh '''
                         docker images --filter "dangling=true" --format "{{.ID}} {{.Repository}}" | \
                         grep "${SERVICE_NAME}" | \
                         awk '{print $1}' | \
                         xargs -r docker rmi
-                    """
+                    '''
                 }
             }
         }
