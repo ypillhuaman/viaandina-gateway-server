@@ -67,7 +67,7 @@ pipeline {
             }
         }
 
-        stage('Limpiar imágenes <none> de scheduler-msvc') {
+        stage('Limpiar imágenes <none>') {
             steps {
                 script {
                     echo "Buscando imágenes <none> asociadas a ${SERVICE_NAME}..."
