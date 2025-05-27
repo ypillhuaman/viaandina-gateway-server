@@ -9,8 +9,8 @@ spring:
   cloud:
     gateway:
       routes:
-      - id: viandina-scheduler-msvc
-        uri: lb://viandina-scheduler-msvc
+      - id: viaandina-scheduler-msvc
+        uri: lb://viaandina-scheduler-msvc
         predicates:
         - Path=/api/scheduler/**
         filters:
