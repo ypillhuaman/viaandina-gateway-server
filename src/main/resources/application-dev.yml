@@ -15,3 +15,9 @@ spring:
         - Path=/api/scheduler/**
         filters:
         - StripPrefix=2
+      - id: viaandina-fleet-management-msvc
+        uri: lb://viaandina-fleet-management-msvc
+        predicates:
+        - Path=/api/fleet/**
+        filters:
+        - StripPrefix=2
