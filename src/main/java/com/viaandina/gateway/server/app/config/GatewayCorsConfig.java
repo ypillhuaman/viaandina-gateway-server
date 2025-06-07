@@ -9,8 +9,8 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.reactive.CorsWebFilter;
 import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource;
 
-@Configuration
-@Profile("local")
+// @Configuration
+// @Profile("local")
 public class GatewayCorsConfig {
 
     // @Bean

@@ -3,6 +3,22 @@ spring:
     name: viaandina-gateway-server
   profiles:
     active: local
+  cloud:
+      gateway:
+        globalcors:
+          corsConfigurations:
+            '[/**]':
+              allowedOrigins:
+                - "http://localhost:4200"
+              allowedMethods:
+                - GET
+                - POST
+                - PUT
+                - DELETE
+                - OPTIONS
+              allowedHeaders:
+                - "*"
+              allowCredentials: true
 
 server:
   port: 8090
